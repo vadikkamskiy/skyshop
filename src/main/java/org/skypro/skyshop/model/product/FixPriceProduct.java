@@ -1,14 +1,16 @@
 package org.skypro.skyshop.model.product;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
+@Component
+@Scope("prototype")
 public class FixPriceProduct extends Product {
     static int FIXED_PRICE = 109;
-    private final UUID id;
-
-    public FixPriceProduct(String n,UUID i) throws Exception{
-        super(n);
-        id = i;
+    public FixPriceProduct(String n) throws Exception{
+        super(n,UUID.randomUUID());
     }
     @Override
     public int getPrice() {
@@ -27,9 +29,4 @@ public class FixPriceProduct extends Product {
         output+=this.getPrice();
         return output;
     }
-    @Override
-    public UUID getId() {
-        return id;
-    }
-    
 }

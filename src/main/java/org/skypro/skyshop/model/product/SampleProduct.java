@@ -1,14 +1,18 @@
 package org.skypro.skyshop.model.product;
 
-import java.util.UUID;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.util.UUID;
+@Component
+@Scope("prototype")
 public class SampleProduct extends Product {
     private final int price;
-    private final UUID id;
-    public SampleProduct(String n ,int p, UUID i)throws Exception{
-        super(n);
+    public SampleProduct(String n ,int p)throws Exception{
+        super(n,UUID.randomUUID());
         price = p;
-        id = i;
+
         try {
             checkPrice(p);
         } catch (IllegalAccessException e) {
@@ -35,9 +39,5 @@ public class SampleProduct extends Product {
         if(u<=0){
             throw new IllegalAccessException("The price cannot be like this " + u + " that should be more 0");
         }
-    }
-    @Override
-    public UUID getId() {
-        return id;
     }
 }

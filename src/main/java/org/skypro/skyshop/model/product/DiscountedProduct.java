@@ -1,16 +1,19 @@
 package org.skypro.skyshop.model.product;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
+@Component
+@Scope("prototype")
 public class DiscountedProduct extends Product {
     private final int price;
     public int discount;
-    private final UUID id;
-    public DiscountedProduct(String n, int p, int d,UUID i) throws Exception{
-        super(n);
+    public DiscountedProduct(String n, int p, int d) throws Exception{
+        super(n,UUID.randomUUID());
         price = p;
         discount = d;
-        id = i;
         try {
             checkPrice(p,d);
         } catch (IllegalAccessException e) {
@@ -26,7 +29,7 @@ public class DiscountedProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
-
+    @Override
     public String toString() {
         String output = "";
         output+=this.getType()+" ";
@@ -43,8 +46,5 @@ public class DiscountedProduct extends Product {
         if(p<0 || p>100){
             throw new IllegalAccessException("wrong input discount: " + p+ "% ??! thats unreal!!");
         }
-    }
-    public UUID getId() {
-        return id;
     }
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.Product;
+import org.skypro.skyshop.service.ProductService;
 import org.skypro.skyshop.service.SearchService;
 import org.skypro.skyshop.service.StorageService;
 import org.skypro.skyshop.model.search.Searchable;
@@ -20,8 +21,8 @@ public class ShopController {
     private final StorageService storageService;
     private final SearchService searchService;
     public ShopController(StorageService storageService,SearchService searchService) throws Exception{
-        this.storageService = new StorageService();
-        this.searchService = new SearchService(storageService);
+        this.storageService = storageService;
+        this.searchService = searchService;
     }
 
     @GetMapping("/products")

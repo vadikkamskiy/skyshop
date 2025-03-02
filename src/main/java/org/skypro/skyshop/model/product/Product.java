@@ -1,17 +1,21 @@
 package org.skypro.skyshop.model.product;
 
 import java.util.Objects;
+import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.skypro.skyshop.model.search.Searchable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public abstract class Product implements Searchable{
     private final String name;
-    public Product(String n) throws IllegalAccessException{
-        name = n;
-        checkNPE(n);
+    private final UUID id;
+    protected Product(String name, UUID id) {
+        this.name = name;
+        this.id = id;
     }
+
 
     public String getName(){
         return name;
@@ -41,11 +45,14 @@ public abstract class Product implements Searchable{
     @Override
     public boolean equals(Object obj){
         if(this == obj) return true;
-        if(obj instanceof Product){
-            Product other = (Product) obj;
+        if(obj instanceof Product other){
             return this.hashCode() == other.hashCode() && this.name.equals(other.getName());
         }else{
             return false;
         }
+    }
+    @Override
+    public UUID getId(){
+        return this.id;
     }
 }

@@ -3,6 +3,7 @@ package org.skypro.skyshop.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.search.SearchResult;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;

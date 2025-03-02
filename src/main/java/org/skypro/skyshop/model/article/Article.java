@@ -5,18 +5,15 @@ import java.util.UUID;
 
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.search.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Article implements Searchable{
     private final String nameOfArticle;
     private final String textOfArticle;
-    private final UUID id;
-
-    public Article(String n,String t, UUID i){
+    private final UUID id = UUID.randomUUID();
+    public Article(String n,String t){
         nameOfArticle = n;
         textOfArticle = t;
-        id = i;
     }
     public String toString(){
         return getType() +" "+ nameOfArticle + " - " + textOfArticle;
