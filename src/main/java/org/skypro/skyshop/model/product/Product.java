@@ -3,7 +3,6 @@ package org.skypro.skyshop.model.product;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.skypro.skyshop.model.search.Searchable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public abstract class Product implements Searchable{
     private final String name;
     private final UUID id;
-    protected Product(String name, UUID id) {
+    protected Product(String name, UUID id) throws IllegalAccessException {
+        checkNPE(name);
         this.name = name;
         this.id = id;
     }

@@ -12,12 +12,7 @@ public class SampleProduct extends Product {
     public SampleProduct(String n ,int p)throws Exception{
         super(n,UUID.randomUUID());
         price = p;
-
-        try {
-            checkPrice(p);
-        } catch (IllegalAccessException e) {
-            throw e;
-        }
+        checkPrice(p);
     }
     @Override
     public int getPrice(){

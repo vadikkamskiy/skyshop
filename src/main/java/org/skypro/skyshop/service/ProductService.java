@@ -5,7 +5,6 @@ import org.skypro.skyshop.model.product.DiscountedProduct;
 import org.skypro.skyshop.model.product.FixPriceProduct;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SampleProduct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,6 @@ import java.util.UUID;
 @Component
 public class ProductService {
     private final ApplicationContext context;
-    @Autowired
     ProductService(ApplicationContext context){
         this.context = context;
     }
