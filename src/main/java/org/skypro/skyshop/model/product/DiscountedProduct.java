@@ -14,11 +14,7 @@ public class DiscountedProduct extends Product {
         super(n,UUID.randomUUID());
         price = p;
         discount = d;
-        try {
-            checkPrice(p,d);
-        } catch (IllegalAccessException e) {
-            throw e;
-        }
+        checkPrice(p,d);
     }
     @Override
     public int getPrice(){

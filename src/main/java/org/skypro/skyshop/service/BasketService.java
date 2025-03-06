@@ -3,6 +3,7 @@ package org.skypro.skyshop.service;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
+import org.skypro.skyshop.model.product.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -12,7 +13,8 @@ public class BasketService {
     private final ProductBasket b;
     private final StorageService store;
 
-    public BasketService(ProductBasket b, StorageService store, UserBasket ub) {
+
+    public BasketService(ProductBasket b, StorageService store) {
         this.b = b;
         this.store = store;
     }
@@ -26,8 +28,13 @@ public class BasketService {
         }
     }
     public UserBasket getUserBasket(){
+        System.out.println(b.getProductBasket());
         return new UserBasket(b.getProductBasket().entrySet().stream()
-                .map(e-> new BasketItem(store.getProductById(e.getKey()).get(),e.getValue()))
+                .map(e-> {
+                    Product product = store.getProductById(e.getKey())
+                            .orElseThrow(() -> new RuntimeException("Продукт не найден: " + e.getKey()));
+                    return new BasketItem(product, e.getValue());
+                })
                 .toList());
     }
 }

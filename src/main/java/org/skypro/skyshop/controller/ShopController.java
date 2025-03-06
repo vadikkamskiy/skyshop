@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.Product;
-import org.skypro.skyshop.service.ProductService;
 import org.skypro.skyshop.service.SearchService;
 import org.skypro.skyshop.service.StorageService;
 import org.skypro.skyshop.model.search.Searchable;
@@ -24,7 +23,6 @@ public class ShopController {
         this.storageService = storageService;
         this.searchService = searchService;
     }
-
     @GetMapping("/products")
     public Map<UUID,Product> p(){
         return storageService.getProducts();
