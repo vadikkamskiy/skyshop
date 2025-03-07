@@ -1,6 +1,8 @@
 package org.skypro.skyshop.controller;
 
 import org.skypro.skyshop.model.basket.UserBasket;
+import org.skypro.skyshop.model.exceptions.NoSuchProductException;
+import org.skypro.skyshop.model.exceptions.ShopError;
 import org.skypro.skyshop.service.BasketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,8 @@ public class BasketController {
         try {
             basketService.checkProduct(id);
             return ResponseEntity.ok("Товар добавлен в корзину!");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Неверный UUID");
+        } catch (NoSuchProductException e) {
+            throw new NoSuchProductException(id);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Ошибка сервера: " + e.getMessage());
         }
