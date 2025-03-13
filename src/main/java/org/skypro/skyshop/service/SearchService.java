@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SearchService {
-    private final List<Searchable> searchables;
+    private final StorageService storageService;
     public SearchService(StorageService storageService){
-        searchables = storageService.getSearchables();
+        this.storageService = storageService;
     }
     public List<SearchResult> search(String pattern){
-        return searchables.stream()
-            .filter(a -> a.toString().toLowerCase().contains(pattern.toLowerCase()))
+        return storageService.getSearchables().stream()
+            .filter(a -> a.getSearchTerm().toLowerCase().contains(pattern.toLowerCase()))
             .map(SearchResult::fromSearchable)
             .collect(Collectors.toList());
     }
     public List<Searchable> getList(){
-        return searchables;
+        return storageService.getSearchables();
     }
 }
